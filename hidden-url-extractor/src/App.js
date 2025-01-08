@@ -6,16 +6,13 @@ const HiddenUrlExtractor = () => {
   useEffect(() => {
     const fetchHtmlContent = async () => {
       try {
-        // Step 1: Fetch the HTML content from the provided URL
         const url = 'https://tns4lpgmziiypnxxzel5ss5nyu0nftol.lambda-url.us-east-1.on.aws/challenge';
         const response = await fetch(url);
         const text = await response.text();
 
-        // Step 2: Parse the HTML content by creating a DOMParser
         const parser = new DOMParser();
         const doc = parser.parseFromString(text, 'text/html');
 
-        // Step 3: Find all <i> tags with class "char" following the specified DOM pattern
         const validCharacters = [];
         const codeTags = doc.querySelectorAll('code[data-class^="23"]');
 
@@ -33,7 +30,6 @@ const HiddenUrlExtractor = () => {
           }
         });
 
-        // Step 4: Join the collected characters to form the hidden URL
         const hiddenUrl = validCharacters.join('');
         setHiddenUrl(hiddenUrl);
 
